@@ -26,11 +26,11 @@
                         <asp:HyperLink ID="home" NavigateUrl="~/Views/homepage.aspx" Target="_parent" runat="server">HOME</asp:HyperLink>
                     </div>
                     <div>
-                        <asp:HyperLink ID="politics" NavigateUrl="~/Views/othernews.aspx?category=POLITICS"
+                        <asp:HyperLink ID="politics" NavigateUrl="~/Views/othernews.aspx?category=Politics"
                             Target="_parent" runat="server">POLITICS</asp:HyperLink>
                     </div>
                     <div>
-                        <asp:HyperLink ID="business" NavigateUrl="~/Views/othernews.aspx?category=BUSINESS"
+                        <asp:HyperLink ID="business" NavigateUrl="~/Views/othernews.aspx?category=Business"
                             Target="_parent" runat="server">BUSINESS</asp:HyperLink>
                     </div>
                     <div>
@@ -38,7 +38,7 @@
                             runat="server">PROPERTIES </asp:HyperLink>
                     </div>
                     <div>
-                        <asp:HyperLink ID="HyperLink5" NavigateUrl="~/Views/othernews.aspx?category=WORLDNEWS"
+                        <asp:HyperLink ID="HyperLink5" NavigateUrl="~/Views/othernews.aspx?category=WorldNews"
                             Target="_blank" runat="server">WORLD NEWS </asp:HyperLink>
                     </div>
                     <div>
