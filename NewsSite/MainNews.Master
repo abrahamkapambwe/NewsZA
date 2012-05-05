@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="google-site-verification" content="8tI9ZEOmJZMx-Ov8yp0-JWWjSjwYxC9SFdwUNyGkNAs" />
     <title>News - South Africa</title>
     <link href="Styles/stylesheet.css" rel="stylesheet" type="text/css" />
     <link href="Styles/style.css" rel="stylesheet" type="text/css" />
@@ -352,6 +353,19 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-31447083-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
     </form>
 </body>
 </html>
