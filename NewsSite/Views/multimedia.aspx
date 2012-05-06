@@ -365,7 +365,7 @@
                 </div>
                 <div class="information-design">
                     <div class="template-information">
-                        <asp:ListView runat="server" ID="ListView2" OnItemDataBound="lstEntertainmentHeadlines_itemDatabound">
+                        <asp:ListView runat="server" ID="lstCommedyHeadlines" OnItemDataBound="lstCommedyHeadlines_itemDatabound">
                             <LayoutTemplate>
                                 <div runat="server" id="itemPlaceholder">
                                 </div>
