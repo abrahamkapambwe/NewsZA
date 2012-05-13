@@ -18,7 +18,7 @@
       <Value Profile="(Default)">rssnewsengine</Value>
     </Setting>
     <Setting Name="PropertyUrlSA" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://epropertysearchza.cloudapp.net</Value>
+      <Value Profile="(Default)">http://epropertysearchza.apphb.com/</Value>
     </Setting>
     <Setting Name="PropertyUrlKA" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://epropertysearchke.apphb.com/</Value>
@@ -45,7 +45,7 @@
       <Value Profile="(Default)">http://epropertysearchzm.apphb.com/PropertyTableAzures</Value>
     </Setting>
     <Setting Name="PropertySiteza" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://epropertysearchza.cloudapp.net/PropertyTableAzures</Value>
+      <Value Profile="(Default)">http://epropertysearchza.apphb.com/PropertyTableAzures</Value>
     </Setting>
     <Setting Name="PropertyUrlZM" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://epropertysearchzm.apphb.com</Value>

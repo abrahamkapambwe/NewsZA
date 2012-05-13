@@ -70,7 +70,7 @@ namespace NewsSite.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://epropertysearchza.cloudapp.net")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://epropertysearchza.apphb.com/")]
         public string PropertyUrlSA {
             get {
                 return ((string)(this["PropertyUrlSA"]));
@@ -151,7 +151,7 @@ namespace NewsSite.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://epropertysearchza.cloudapp.net/PropertyTableAzures")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://epropertysearchza.apphb.com/PropertyTableAzures")]
         public string PropertySiteza {
             get {
                 return ((string)(this["PropertySiteza"]));

@@ -27,6 +27,7 @@ namespace NewsSite.Views
                             var newsb =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.BUSINESS).
                                     ToList();
+                            LoadSession(newsb);
                             if(!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newsb);
@@ -42,6 +43,7 @@ namespace NewsSite.Views
                             var newse =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.ENTERTAINMENT).
                                     ToList();
+                            LoadSession(newse);
                             if (!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newse);
@@ -56,6 +58,7 @@ namespace NewsSite.Views
                             var newst =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.TECHNOLOGY).
                                     ToList();
+                            LoadSession(newst);
                             if (!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newst);
@@ -70,6 +73,7 @@ namespace NewsSite.Views
                             var newsl =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.LIFESTYLE).
                                     ToList();
+                            LoadSession(newsl);
                             if (!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newsl);
@@ -83,7 +87,7 @@ namespace NewsSite.Views
                             lblHeadline.Text = "Business";
                             var newsg =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.GOSSIP).ToList();
-                                  
+                            LoadSession(newsg);     
                             if (!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newsg);
@@ -98,7 +102,7 @@ namespace NewsSite.Views
                             var newsp =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.POLITICS).
                                     ToList();
-
+                            LoadSession(newsp);
                             if (!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newsp);
@@ -112,6 +116,7 @@ namespace NewsSite.Views
                             lblHeadline.Text = "Sport";
                             var newss =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.SPORT).ToList();
+                            LoadSession(newss);
                             if (!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newss);
@@ -125,6 +130,8 @@ namespace NewsSite.Views
                             lblHeadline.Text = "World News";
                             var newswn =
                                 GetNewsFromAmazon.GetNewsFromCache().Where(t => t.Category == Categories.WORLDNEWS).ToList();
+                            LoadSession(newswn);
+                                
                             if (!string.IsNullOrWhiteSpace(value))
                             {
                                 GetPopular(newswn);
@@ -139,6 +146,21 @@ namespace NewsSite.Views
             }
         }
 
+        private void LoadSession(List<NewsComponents> newswn)
+        {
+            Session["SessionNews"] = newswn;
+        }
+        protected void lstPropertyView_PagePropertiesChanged(object sender, EventArgs e)
+        {
+            if (Session["SessionNews"] != null)
+            {
+                var newswn = (List<NewsComponents>)Session["SessionNews"];
+                lstothernews.DataSource = newswn;
+                lstothernews.DataBind();
+
+            }
+            
+        }
         private void GetPopular(List<NewsComponents> newsComponents)
         {
             var newsItems = newsComponents.OrderByDescending(p => p.CommentCount).ToList();

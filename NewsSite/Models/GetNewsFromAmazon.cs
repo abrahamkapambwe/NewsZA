@@ -356,7 +356,11 @@ namespace Newsza.Models
                             i++;
                         }
                     }
-                    comments.Add(comment);
+                    var coment = (from c in comments
+                                  where c.CommentItem == comment.CommentItem
+                                  select c).FirstOrDefault();
+                    if (coment == null)
+                        comments.Add(comment);
                 }
             }
             return comments;
