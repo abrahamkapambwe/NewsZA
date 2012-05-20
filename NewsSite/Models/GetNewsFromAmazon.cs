@@ -186,7 +186,7 @@ namespace Newsza.Models
         {
             List<Multimedia> multimedias = new List<Multimedia>();
             Multimedia multimedia;
-            String selectExpression = "Select  * From " + domainName;
+            String selectExpression = "Select  * From " + domainName + " LIMIT 1000";
             SelectRequest selectRequestAction = new SelectRequest().WithSelectExpression(selectExpression);
             SelectResponse selectResponse = sdbClient.Select(selectRequestAction);
             if (selectResponse.IsSetSelectResult())
@@ -247,7 +247,7 @@ namespace Newsza.Models
         {
             List<NumberViews> numberViewses = new List<NumberViews>();
             NumberViews numberViews;
-            String selectExpression = "Select * From " + domainName;
+            String selectExpression = "Select * From " + domainName + " LIMIT 1000";
             SelectRequest selectRequestAction = new SelectRequest().WithSelectExpression(selectExpression);
             SelectResponse selectResponse = sdbClient.Select(selectRequestAction);
             if (selectResponse.IsSetSelectResult())
@@ -297,7 +297,7 @@ namespace Newsza.Models
             List<Comment> comments = new List<Comment>();
             Comment comment;
 
-            String selectExpression = "Select * From " + domainName;
+            String selectExpression = "Select * From " + domainName + " LIMIT 1000";
             SelectRequest selectRequestAction = new SelectRequest().WithSelectExpression(selectExpression);
             SelectResponse selectResponse = sdbClient.Select(selectRequestAction);
             if (selectResponse.IsSetSelectResult())
@@ -409,7 +409,7 @@ namespace Newsza.Models
             List<NewsComponents> newsItems = new List<NewsComponents>();
             NewsComponents newsItem = null;
 
-            String selectExpression = "Select NewsID,Source,Section,Publish,NewsHeadline,NewsAdded,Photos,Summary,Category,SummaryContent,ThumbNailUrl From " + domainName;
+            String selectExpression = "Select NewsID,Source,Section,Publish,NewsHeadline,NewsAdded,Photos,Summary,Category,SummaryContent,ThumbNailUrl From " + domainName + " LIMIT 1000";
             SelectRequest selectRequestAction = new SelectRequest().WithSelectExpression(selectExpression);
             SelectResponse selectResponse = sdbClient.Select(selectRequestAction);
             if (selectResponse.IsSetSelectResult())

@@ -240,9 +240,9 @@
                         ID="hrheadline" runat="server"></asp:HyperLink></span>
                 </div>
                 <div class="right">
-                    <span>&nbsp;&nbsp;<a href="http://www.facebook.com/pages/Newsza/455124354503027"><img src="../images/facebook.jpg" alt="Facebook" border="0px" /></a>&nbsp;&nbsp;<a
-                        href="https://twitter.com/#!/newsza2012"><img src="../images/twitter.jpg" alt="Twitter" border="0px" /></a></span><span
-                            class="share">SHARE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;<a href="http://www.facebook.com/pages/Newsza/455124354503027"><img
+                        src="../images/facebook.jpg" alt="Facebook" border="0px" /></a>&nbsp;&nbsp;<a href="https://twitter.com/#!/newsza2012"><img
+                            src="../images/twitter.jpg" alt="Twitter" border="0px" /></a></span><span class="share">SHARE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </div>
             </div>
             <div id="sslideshow">
@@ -445,6 +445,15 @@
                                         </li>
                                     </ItemTemplate>
                                 </asp:ListView>
+                            </div>
+                            <div style="clear: both">
+                            </div>
+                            <div class="propertybanner">
+                                <div style="padding-top: 10px">
+                                    <a target="_blank" href="http://epropertysearchza.apphb.com">
+                                        <img src="../images/eproperty1.png" alt="property" width="230px" />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

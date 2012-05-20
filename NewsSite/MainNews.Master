@@ -272,6 +272,15 @@
                                 </ItemTemplate>
                             </asp:ListView>
                         </div>
+                         <div style="clear: both">
+                        </div>
+                        <div class="propertybanner">
+                            <div style="padding-top: 10px">
+                                <a target="_blank" href="http://epropertysearchza.apphb.com">
+                                    <img src="../images/eproperty1.png" alt="property" width="230px" />
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

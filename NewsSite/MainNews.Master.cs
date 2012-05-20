@@ -35,7 +35,7 @@ namespace NewsSite
         {
             if (!IsPostBack)
             {
-              // LoadInTheCache();
+              LoadInTheCache();
                 var news = GetNewsFromAmazon.GetNewsFromCache();
                 if (news != null && news.Any())
                 {
