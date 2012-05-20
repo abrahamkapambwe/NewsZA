@@ -254,7 +254,7 @@
                             </LayoutTemplate>
                             <ItemTemplate>
                                 <div>
-                                    <span><span class="smaller"></span></span>
+                                    <span><span class="smaller"></span><span>
                                     <asp:HyperLink runat="server" ID="hyperNavi">
                                         <%#Eval("NewsHeadline")%> </asp:HyperLink><br />
                                     </span>
