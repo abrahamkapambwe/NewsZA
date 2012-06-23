@@ -13,6 +13,7 @@ using System.IO;
 using Amazon.S3.Model;
 using Amazon.S3;
 using NewsSite.Properties;
+using System.Web.Caching;
 
 
 namespace Newsza.Models
@@ -51,24 +52,24 @@ namespace Newsza.Models
                 .WithItemName(Convert.ToString(numberViews.ViewsID));
             putViewsAttrRequest.
                 WithAttribute(new ReplaceableAttribute
-                                  {
-                                      Name = "ViewsID",
-                                      Value = Convert.ToString(numberViews.ViewsID),
-                                      Replace = false
-                                  },
+                {
+                    Name = "ViewsID",
+                    Value = Convert.ToString(numberViews.ViewsID),
+                    Replace = false
+                },
 
                               new ReplaceableAttribute
-                                  {
-                                      Name = "NewsID",
-                                      Value = numberViews.NewsID,
-                                      Replace = false
-                                  },
+                              {
+                                  Name = "NewsID",
+                                  Value = numberViews.NewsID,
+                                  Replace = false
+                              },
                               new ReplaceableAttribute
-                                  {
-                                      Name = "Views",
-                                      Value = Convert.ToString(numberViews.Views),
-                                      Replace = false
-                                  });
+                              {
+                                  Name = "Views",
+                                  Value = Convert.ToString(numberViews.Views),
+                                  Replace = true
+                              });
             sdbClient.PutAttributes(putViewsAttrRequest);
         }
 
@@ -80,24 +81,24 @@ namespace Newsza.Models
                 .WithItemName(Convert.ToString(comment.CommentID));
             putCommentAttrRequest.WithAttribute
                 (new ReplaceableAttribute
-                   {
-                       Name = "NewsID",
-                       Value = Convert.ToString(comment.NewsID),
-                       Replace = false
-                   },
+                {
+                    Name = "NewsID",
+                    Value = Convert.ToString(comment.NewsID),
+                    Replace = false
+                },
 
                      new ReplaceableAttribute
-                   {
-                       Name = "UserName",
-                       Value = comment.UserName,
-                       Replace = false
-                   },
+                     {
+                         Name = "UserName",
+                         Value = comment.UserName,
+                         Replace = false
+                     },
                      new ReplaceableAttribute
-                    {
-                        Name = "CommentID",
-                        Value = Convert.ToString(comment.CommentID),
-                        Replace = false
-                    },
+                     {
+                         Name = "CommentID",
+                         Value = Convert.ToString(comment.CommentID),
+                         Replace = false
+                     },
                     new ReplaceableAttribute
                     {
                         Name = "CommentAdded",
@@ -170,11 +171,11 @@ namespace Newsza.Models
                 .WithDomainName(domainName)
                 .WithItemName(Convert.ToString(comment.CommentID));
             putAttrRequest.WithAttribute(new ReplaceableAttribute
-                                             {
-                                                 Name = "Likes",
-                                                 Value = Convert.ToString(comment.Likes),
-                                                 Replace = true
-                                             }
+            {
+                Name = "Likes",
+                Value = Convert.ToString(comment.Likes),
+                Replace = true
+            }
 
                 );
             sdbClient.PutAttributes(putAttrRequest);
@@ -222,7 +223,7 @@ namespace Newsza.Models
                                     multimedia.Title = attribute.Value;
                                     break;
                                 case "YouTubeAdded":
-                                    multimedia.YouTubeAdded = Convert.ToDateTime(attribute.Value);
+                                    multimedia.YouTubeAdded = string.IsNullOrWhiteSpace(attribute.Value) ? Convert.ToDateTime("4/1/2012 12:54:07 AM") : Convert.ToDateTime(attribute.Value);
                                     break;
 
                                 case "Publish":
@@ -576,9 +577,27 @@ namespace Newsza.Models
             else
             {
                 news = LoadItemsInCache().Where(p => p.Publish == true).OrderByDescending(p => p.NewsAdded).ToList();
-                HttpRuntime.Cache.Insert("NewsItems", news, null, DateTime.Now.AddMinutes(60), System.Web.Caching.Cache.NoSlidingExpiration);
+                LoadCache(news);
             }
             return news;
+        }
+        public static void LoadCache(List<NewsComponents> news)
+        {
+
+            HttpRuntime.Cache.Insert("NewsItems", news, null, DateTime.Now.AddMinutes(60), System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.High, new CacheItemRemovedCallback(RemovedCallback));
+        }
+        public static void RemovedCallback(String key, object value,
+        CacheItemRemovedReason removedReason)
+        {
+            var news = LoadItemsInCache().Where(p => p.Publish == true).OrderByDescending(p => p.NewsAdded).ToList();
+            LoadCache(news);
+
+        }
+        public static void LoadMultimediaCache(List<Multimedia> videos)
+        {
+            HttpRuntime.Cache.Insert("VideoItems", videos, null, DateTime.Now.AddMinutes(60), System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.High, new CacheItemRemovedCallback(RemovedMultimediaCallback));
+
+
         }
         public static List<Multimedia> GetVideosFromCache(string domainName)
         {
@@ -591,24 +610,44 @@ namespace Newsza.Models
             else
             {
                 videos = GetMultimedia(domainName).Where(p => p.Publish == true).OrderByDescending(p => p.YouTubeAdded).ToList();
-                HttpRuntime.Cache.Insert("VideoItems", videos, null, DateTime.Now.AddMinutes(60), System.Web.Caching.Cache.NoSlidingExpiration);
+                LoadMultimediaCache(videos);
             }
             return videos;
+        }
+        public static void RemovedMultimediaCallback(String key, object value,
+       CacheItemRemovedReason removedReason)
+        {
+            var videos = GetMultimedia(Settings.Default.ZambiaVideo).Where(p => p.Publish == true).OrderByDescending(p => p.YouTubeAdded).ToList();
+            LoadMultimediaCache(videos);
+
+        }
+        public static void LoadCommentCache(List<Comment> comments)
+        {
+            HttpRuntime.Cache.Insert("CommentItems", comments, null, DateTime.Now.AddMinutes(10), System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.High, new CacheItemRemovedCallback(RemovedCommentCallback));
+
+
         }
         public static List<Comment> GetCommentsFromCache(string domainName)
         {
 
-            List<Comment> comments= null;
+            List<Comment> comments = null;
             if (HttpRuntime.Cache["CommentItems"] != null)
             {
                 comments = (List<Comment>)HttpRuntime.Cache["CommentItems"];
             }
             else
             {
-                comments = GetComments(domainName).Where(p => p.Publish == true).OrderByDescending(p => p.CommentAdded).ToList();
-                HttpRuntime.Cache.Insert("CommentItems", comments, null, DateTime.Now.AddMinutes(10), System.Web.Caching.Cache.NoSlidingExpiration);
+                comments = GetComments(Settings.Default.DomainNameComment).Where(p => p.Publish == true).OrderByDescending(p => p.CommentAdded).ToList();
+                LoadCommentCache(comments);
             }
             return comments;
+        }
+        public static void RemovedCommentCallback(String key, object value,
+       CacheItemRemovedReason removedReason)
+        {
+            var comments = GetComments(Settings.Default.DomainNameComment).Where(p => p.Publish == true).OrderByDescending(p => p.CommentAdded).ToList();
+            LoadCommentCache(comments);
+
         }
         private static List<NewsComponents> LoadItemsInCache()
         {
@@ -645,9 +684,23 @@ namespace Newsza.Models
                 item.CommentCount = comments.Where(p => p.NewsID == Convert.ToString(item.NewsID)).Count();
 
                 item.Views = !viewsContains ? 1 : views.Where(p => p.NewsID == Convert.ToString(item.NewsID)).FirstOrDefault().Views;
-                item.ViewID = !viewsContains
-                                  ? Guid.NewGuid()
-                                  : views.Where(p => p.NewsID == Convert.ToString(item.NewsID)).FirstOrDefault().ViewsID;
+                if (!viewsContains)
+                {
+                    item.ViewID = Guid.NewGuid();
+                }
+                else
+                {
+                    var viewitems = views.Where(p => p.NewsID == Convert.ToString(item.NewsID)).FirstOrDefault();
+                    if (viewitems != null)
+                    {
+                        item.ViewID = viewitems.ViewsID;
+                    }
+                    else
+                    {
+                        item.ViewID = Guid.NewGuid();
+                    }
+                }
+
             }
 
             return news;
