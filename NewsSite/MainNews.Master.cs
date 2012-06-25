@@ -35,13 +35,19 @@ namespace NewsSite
         {
             if (!IsPostBack)
             {
-              LoadInTheCache();
-                var news = GetNewsFromAmazon.GetNewsFromCache();
-                if (news != null && news.Any())
-                {
-                    lstPopularNews.DataSource = news.OrderByDescending(s => s.CommentCount).Take(5);
-                    lstPopularNews.DataBind();
-                }
+                System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback((Object obj) =>
+                    {
+                        LoadInTheCache();
+                        var news = GetNewsFromAmazon.GetNewsFromCache().AsParallel().AsEnumerable();
+                        if (news != null && news.Any())
+                        {
+                            lstPopularNews.DataSource = news.OrderByDescending(s => s.CommentCount).Take(5);
+                            lstPopularNews.DataBind();
+                        }
+
+                    }));
+
+               
             }
         }
         public void Search_Click(object sender, EventArgs e)

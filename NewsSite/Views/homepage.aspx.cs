@@ -12,16 +12,42 @@ namespace NewsSite.Views
 {
     public partial class test : System.Web.UI.Page
     {
+        private AsyncTaskDelegate _dlgt;
+        protected delegate void AsyncTaskDelegate();
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!IsPostBack)
             {
+                Page.AddOnPreRenderCompleteAsync(OnBegin, EndTask);
+                
 
-                LoadNewsHeadline();
+                
             }
         }
+        public void ExecuteAsyncTask()
+        {
+            
+           
+        }
 
+        public IAsyncResult OnBegin(object sender, EventArgs e,
+            AsyncCallback cb, object extraData)
+        {
+            
+
+            _dlgt = new AsyncTaskDelegate(ExecuteAsyncTask);
+            IAsyncResult result = _dlgt.BeginInvoke(cb, extraData);
+
+            return result;
+        }
+        private void EndTask(IAsyncResult ar)
+        {
+            LoadNewsHeadline();
+            ltlLoadingData.Visible = false;
+            //Write you code here
+        }
+    
         private void LoadNewsHeadline()
         {
             
@@ -247,5 +273,7 @@ namespace NewsSite.Views
             }
         }
 
+
+      
     }
 }
