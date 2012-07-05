@@ -160,7 +160,7 @@ namespace NewsSite
             if (e.Item.ItemType == ListViewItemType.DataItem)
             {
                 PropertyTableAzure property = (PropertyTableAzure)e.Item.DataItem;
-                //HyperLink link = (HyperLink)e.Item.FindControl("hypLink");
+                HtmlImage link = (HtmlImage)e.Item.FindControl("imgProperty");
                 HtmlAnchor html = (HtmlAnchor)e.Item.FindControl("hyparchor");
                 Label price = (Label)e.Item.FindControl("lblPrice");
                 Label street = (Label)e.Item.FindControl("lblStreet");
@@ -169,7 +169,7 @@ namespace NewsSite
                 if (property.ImageUrlAzures.Any())
                 {
                     html.HRef = Settings.Default.PropertyUrlSA + "Public/PropertyDetails.aspx?PropertyID=" + property.PropertyID;
-                    //link.ImageUrl = property.ImageUrlAzures[0].thumbnailblob;
+                    link.Src = property.ImageUrlAzures[0].thumbnailblob;
 
                     //link.Target = "_blank";
                     //link.NavigateUrl = Settings.Default.PropertyUrlKA + "Public/PropertyDetails.aspx?PropertyID=" + property.PropertyID;

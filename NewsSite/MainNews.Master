@@ -258,7 +258,7 @@
                                         <div style="clear: both; margin-bottom: 5px; padding-bottom: 10px; padding-top: 5px">
                                             <div style="float: left; margin-right: 8px">
                                                 <a runat="server" id="hyparchor">
-                                                    <img alt="<%#Eval("City") %>" width="90px" height="90px" src="<%#Eval("ImageUrlAzures[0].thumbnailblob") %>" />
+                                                     <img runat="server" id="imgProperty" alt='<%#Eval("City") %>' width="90" height="90"/>
                                                 </a>
                                             </div>
                                             <div style="float: left">

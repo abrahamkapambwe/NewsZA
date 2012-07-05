@@ -13,6 +13,6 @@ C:\NewsASPZA\NewsSite\NewsSite\obj\Debug\NewsSite.pdb
 C:\NewsWebsites\NewsASPZM\NewsZA\NewsSite\bin\bin\AWSSDK.dll
 C:\NewsWebsites\NewsASPZM\NewsZA\NewsSite\bin\NewsSite.dll
 C:\NewsWebsites\NewsASPZM\NewsZA\NewsSite\bin\NewsSite.pdb
-C:\NewsWebsites\NewsASPZM\NewsZA\NewsSite\obj\Debug\ResolveAssemblyReference.cache
 C:\NewsWebsites\NewsASPZM\NewsZA\NewsSite\obj\Debug\NewsSite.dll
 C:\NewsWebsites\NewsASPZM\NewsZA\NewsSite\obj\Debug\NewsSite.pdb
+C:\NewsWebsites\NewsASPZM\NewsZA\NewsSite\obj\Debug\NewsSite.csprojResolveAssemblyReference.cache
